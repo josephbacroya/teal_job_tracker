@@ -1,0 +1,105 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%; /* #F8F9FA */
+    --foreground: 210 11% 15%; /* #212529 */
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 210 11% 15%; /* #212529 */
+    --popover: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground: 210 11% 15%;
+    --primary: 16 100% 60%; /* #FF6B35 */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
+    --secondary: 210 16% 93%; /* #E9ECEF */
+    --secondary-foreground: 210 11% 15%; /* #212529 */
+    --muted: 210 16% 93%; /* #E9ECEF */
+    --muted-foreground: 208 7% 46%; /* #6C757D */
+    --accent: 16 100% 96%; /* Soft Primary / #FFF0EB */
+    --accent-foreground: 16 100% 60%; /* #FF6B35 */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 16% 93%; /* #E9ECEF */
+    --input: 210 16% 93%; /* #E9ECEF */
+    --ring: 16 100% 60%; /* #FF6B35 */
+    --radius: 1rem; /* 16px border-radius */
+    --sidebar: 0 0% 100%; /* #FFFFFF */
+    --sidebar-border: 210 16% 93%; /* #E9ECEF */
+
+    /* Semantic Status Colors */
+    --success: 137 44% 93%; /* #E6F4EA */
+    --success-foreground: 137 65% 34%; /* #1E8E3E */
+    --warning: 46 94% 94%; /* #FEF7E0 */
+    --warning-foreground: 31 100% 45%; /* #E37400 */
+  }
+
+  .dark {
+    --background: 222 47% 6%; /* #0B1120 */
+    --foreground: 210 40% 96%; /* #EDF2F7 */
+    --card: 222 47% 9%; /* #111827 */
+    --card-foreground: 210 40% 96%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 16 100% 60%; /* #FF6B35 — stays consistent */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 17%; /* #1E293B */
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 33% 17%; /* #1E293B */
+    --muted-foreground: 215 20% 65%; /* #94A3B8 */
+    --accent: 16 100% 12%; /* Dark coral tint */
+    --accent-foreground: 16 100% 65%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 96%;
+    --border: 217 33% 17%; /* #1E293B */
+    --input: 217 33% 17%;
+    --ring: 16 100% 60%;
+    --radius: 1rem;
+    --sidebar: 222 47% 7%; /* #0D1526 */
+    --sidebar-border: 217 33% 17%;
+
+    /* Semantic Status Colors (dark-adjusted) */
+    --success: 137 40% 14%;
+    --success-foreground: 137 65% 56%;
+    --warning: 31 60% 14%;
+    --warning-foreground: 31 100% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for dark mode */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}

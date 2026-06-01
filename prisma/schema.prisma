@@ -1,0 +1,164 @@
+// Prisma schema for JobTrackr
+// Architecture note: We use composite indexes for common query patterns
+// to avoid full table scans on the most frequent dashboard queries.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── User ─────────────────────────────────────────────────────────────────────
+// NextAuth requires specific field names (name, email, emailVerified, image).
+// We extend the model with profile data.
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // null for OAuth users
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  accounts     Account[]
+  sessions     Session[]
+  applications JobApplication[]
+
+  @@index([email])
+}
+
+// ─── NextAuth Models ──────────────────────────────────────────────────────────
+// Required by Auth.js for session and OAuth account management.
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ─── JobApplication ───────────────────────────────────────────────────────────
+// Core entity. Status uses an enum so invalid states can't be persisted.
+// Architecture note: We index on (userId, status) and (userId, appliedAt)
+// because those are the two most common dashboard filter combinations.
+model JobApplication {
+  id          String            @id @default(cuid())
+  userId      String
+  companyName String
+  jobTitle    String
+  location    String?
+  salaryMin   Int?
+  salaryMax   Int?
+  jobUrl      String?
+  appliedAt   DateTime          @default(now())
+  status      ApplicationStatus @default(WISHLIST)
+  notes       String?           @db.Text
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relations
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  interviews Interview[]
+  appNotes   Note[]
+
+  @@index([userId])
+  @@index([userId, status])
+  @@index([userId, appliedAt])
+  @@index([companyName])
+}
+
+// ─── Interview ────────────────────────────────────────────────────────────────
+model Interview {
+  id            String          @id @default(cuid())
+  applicationId String
+  type          InterviewType
+  scheduledAt   DateTime
+  location      String?         // Zoom link, office address, phone
+  notes         String?         @db.Text
+  outcome       InterviewOutcome?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  application JobApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@index([applicationId])
+  @@index([scheduledAt])
+}
+
+// ─── Note ─────────────────────────────────────────────────────────────────────
+// Separate notes table allows time-stamped history on an application.
+model Note {
+  id            String   @id @default(cuid())
+  applicationId String
+  content       String   @db.Text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  application JobApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@index([applicationId])
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+enum ApplicationStatus {
+  WISHLIST
+  APPLIED
+  RECRUITER_SCREEN
+  TECHNICAL_INTERVIEW
+  FINAL_INTERVIEW
+  OFFER
+  REJECTED
+}
+
+enum InterviewType {
+  PHONE
+  VIDEO
+  ONSITE
+  TECHNICAL
+  BEHAVIORAL
+  FINAL
+}
+
+enum InterviewOutcome {
+  PASSED
+  FAILED
+  PENDING
+  CANCELLED
+}

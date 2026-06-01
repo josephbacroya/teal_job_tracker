@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Background hex/shield shape -->
+  <path d="M256 32L448 128V384L256 480L64 384V128L256 32Z" fill="#FFF0EB" />
+  
+  <!-- Outer stroke -->
+  <path d="M256 48L424 132V380L256 464L88 380V132L256 48Z" stroke="#FF6B35" stroke-width="24" stroke-linejoin="round" />
+  
+  <!-- J -->
+  <path d="M192 192V304C192 330.51 213.49 352 240 352C266.51 352 288 330.51 288 304V256" stroke="#FF6B35" stroke-width="40" stroke-linecap="round" />
+  
+  <!-- T Top bar -->
+  <path d="M288 192H384" stroke="#FF6B35" stroke-width="40" stroke-linecap="round" />
+  
+  <!-- Stylized dot/accent -->
+  <circle cx="288" cy="192" r="20" fill="#212529" />
+</svg>
