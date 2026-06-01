@@ -6,7 +6,7 @@
 import { getDashboardStats } from "@/lib/actions/applications";
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { ApplicationsByMonthChart } from "@/components/dashboard/applications-by-month-chart";
-import { StatusDistributionChart } from "@/components/dashboard/status-distribution-chart";
+// import { StatusDistributionChart } from "@/components/dashboard/status-distribution-chart"; // <-- Removed unused import
 import { RecentApplications } from "@/components/dashboard/recent-applications";
 import { prisma } from "@/lib/db/prisma";
 import { auth } from "@/lib/auth/auth";
@@ -51,18 +51,18 @@ export default async function DashboardPage() {
         <div className="lg:col-span-1 bg-white border border-border rounded-[16px] p-6 shadow-sm">
           <h2 className="text-[16px] font-semibold text-foreground mb-4">Top Jobs</h2>
           <div className="space-y-4">
-             {/* Mock Top Jobs */}
-             {[1,2,3].map(i => (
-               <div key={i} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors">
-                 <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-                   C
-                 </div>
-                 <div className="flex-1">
-                   <h3 className="text-sm font-semibold">Software Engineer</h3>
-                   <p className="text-xs text-muted-foreground">Google • Applied 2d ago</p>
-                 </div>
-               </div>
-             ))}
+            {/* Mock Top Jobs */}
+            {[1, 2, 3].map(i => (
+              <div key={i} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                  C
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-sm font-semibold">Software Engineer</h3>
+                  <p className="text-xs text-muted-foreground">Google • Applied 2d ago</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -73,18 +73,19 @@ export default async function DashboardPage() {
           <RecentApplications applications={recentApps} />
         </div>
         <div className="lg:col-span-1 bg-white border border-border rounded-[16px] p-6 shadow-sm">
-          <h2 className="text-[16px] font-semibold text-foreground mb-4">Today's Task</h2>
+          {/* Fixed unescaped entity below */}
+          <h2 className="text-[16px] font-semibold text-foreground mb-4">Today&apos;s Task</h2>
           <div className="space-y-4">
-             {/* Mock Today's Tasks */}
-             {[1,2].map(i => (
-               <div key={i} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors">
-                 <div className="w-1.5 h-10 bg-primary rounded-full" />
-                 <div className="flex-1">
-                   <h3 className="text-sm font-semibold">Technical Interview</h3>
-                   <p className="text-xs text-muted-foreground">Stripe • 2:00 PM</p>
-                 </div>
-               </div>
-             ))}
+            {/* Mock Today's Tasks */}
+            {[1, 2].map(i => (
+              <div key={i} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="w-1.5 h-10 bg-primary rounded-full" />
+                <div className="flex-1">
+                  <h3 className="text-sm font-semibold">Technical Interview</h3>
+                  <p className="text-xs text-muted-foreground">Stripe • 2:00 PM</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

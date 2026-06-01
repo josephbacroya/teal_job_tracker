@@ -39,8 +39,9 @@ export function RecentApplications({ applications }: Props) {
           </div>
           <div>
             <h3 className="text-[16px] font-semibold text-foreground">No applications yet</h3>
+            {/* Fixed unescaped entity below */}
             <p className="text-sm text-muted-foreground mt-1 max-w-[250px]">
-              You haven't tracked any quotes. Add your first one to see it here.
+              You haven&apos;t tracked any quotes. Add your first one to see it here.
             </p>
           </div>
           <Link href="/applications/new" className="bg-primary text-primary-foreground font-semibold text-sm px-6 py-2.5 rounded-lg shadow-sm hover:opacity-90 transition-opacity mt-4 inline-block">
@@ -57,10 +58,10 @@ export function RecentApplications({ applications }: Props) {
             if (app.status === "OFFER" || app.status === "PASSED") {
               semanticBg = "bg-[#E6F4EA]"; semanticColor = "text-[#1E8E3E]";
             } else if (app.status === "PENDING" || app.status === "APPLIED") {
-               semanticBg = "bg-[#FEF7E0]"; semanticColor = "text-[#E37400]";
+              semanticBg = "bg-[#FEF7E0]"; semanticColor = "text-[#E37400]";
             } else {
-               semanticBg = config?.bgColor ?? "bg-gray-100";
-               semanticColor = config?.color ?? "text-gray-700";
+              semanticBg = config?.bgColor ?? "bg-gray-100";
+              semanticColor = config?.color ?? "text-gray-700";
             }
 
             return (

@@ -2,7 +2,7 @@
 "use client";
 
 import { User } from "next-auth";
-import { Bell, Search, Plus } from "lucide-react";
+import { Search, Plus } from "lucide-react"; // Removed 'Bell' to fix the unused variable warning
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
