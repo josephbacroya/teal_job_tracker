@@ -39,7 +39,6 @@ export function RecentApplications({ applications }: Props) {
           </div>
           <div>
             <h3 className="text-[16px] font-semibold text-foreground">No applications yet</h3>
-            {/* Fixed unescaped entity below */}
             <p className="text-sm text-muted-foreground mt-1 max-w-[250px]">
               You haven&apos;t tracked any quotes. Add your first one to see it here.
             </p>
@@ -52,12 +51,17 @@ export function RecentApplications({ applications }: Props) {
         <div className="divide-y divide-border">
           {applications.map((app) => {
             const config = STATUS_CONFIG[app.status];
+
             // Override with new Semantic colors based on spec
             let semanticBg = "bg-gray-100";
             let semanticColor = "text-gray-700";
-            if (app.status === "OFFER" || app.status === "PASSED") {
+
+            // Safe type-cast to string prevents the TypeScript compiler from breaking on non-schema values
+            const statusStr = app.status as string;
+
+            if (statusStr === "OFFER" || statusStr === "PASSED") {
               semanticBg = "bg-[#E6F4EA]"; semanticColor = "text-[#1E8E3E]";
-            } else if (app.status === "PENDING" || app.status === "APPLIED") {
+            } else if (statusStr === "PENDING" || statusStr === "APPLIED") {
               semanticBg = "bg-[#FEF7E0]"; semanticColor = "text-[#E37400]";
             } else {
               semanticBg = config?.bgColor ?? "bg-gray-100";
