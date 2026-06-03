@@ -4,14 +4,14 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Upload, Sparkles, AlertCircle, Loader2 } from "lucide-react";
 import { matchJobs } from "@/lib/actions/ai-match";
-import { MatchResults } from "@/components/matchmaker/MatchResults";
+import { MatchResults, type MatchData } from "@/components/matchmaker/MatchResults";
 
 export default function MatchmakerPage() {
   const [file, setFile] = useState<File | null>(null);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [results, setResults] = useState<unknown | null>(null);
+  const [results, setResults] = useState<MatchData | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

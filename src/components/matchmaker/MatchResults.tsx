@@ -3,14 +3,14 @@
 import { motion } from "framer-motion";
 import { Briefcase, Target, ChevronRight } from "lucide-react";
 
-type RecommendedJob = {
+export type RecommendedJob = {
   title: string;
   company: string;
   matchPercentage: number;
   reasoning: string;
 };
 
-type MatchData = {
+export type MatchData = {
   level: string;
   coreSkills: string[];
   recommendedJobs: RecommendedJob[];
