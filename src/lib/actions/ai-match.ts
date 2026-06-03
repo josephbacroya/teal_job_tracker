@@ -1,7 +1,7 @@
 "use server";
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import pdfParse from "pdf-parse/lib/pdf-parse.js";
+const pdfParse = require("pdf-parse");
 import rateLimit from "../rate-limit";
 
 const limiter = rateLimit({
@@ -86,7 +86,7 @@ export async function matchJobs(formData: FormData) {
     try {
       const parsedData = JSON.parse(textResult);
       return { success: true, data: parsedData };
-    } catch (parseError) {
+    } catch {
       console.error("Failed to parse Gemini response:", textResult);
       return { error: "Failed to parse AI response. Please try again." };
     }

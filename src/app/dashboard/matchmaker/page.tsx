@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Upload, FileText, Sparkles, AlertCircle, Loader2 } from "lucide-react";
+import { Upload, Sparkles, AlertCircle, Loader2 } from "lucide-react";
 import { matchJobs } from "@/lib/actions/ai-match";
 import { MatchResults } from "@/components/matchmaker/MatchResults";
 
@@ -11,7 +11,7 @@ export default function MatchmakerPage() {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [results, setResults] = useState<any | null>(null);
+  const [results, setResults] = useState<unknown | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +54,7 @@ export default function MatchmakerPage() {
       } else if (response.data) {
         setResults(response.data);
       }
-    } catch (err) {
+    } catch {
       setError("Something went wrong processing your request.");
     } finally {
       setLoading(false);

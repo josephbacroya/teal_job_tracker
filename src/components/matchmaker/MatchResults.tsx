@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Briefcase, Target, Star, ChevronRight } from "lucide-react";
+import { Briefcase, Target, ChevronRight } from "lucide-react";
 
 type RecommendedJob = {
   title: string;
@@ -63,9 +62,9 @@ export function MatchResults({ data }: { data: MatchData }) {
             <p className="text-sm font-medium text-muted-foreground mb-2">Core Skills Detected</p>
             <div className="flex flex-wrap gap-2">
               {data.coreSkills.map((skill, index) => (
-                <Badge key={index} variant="secondary" className="px-3 py-1">
+                <span key={index} className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-secondary text-secondary-foreground hover:bg-secondary/80">
                   {skill}
-                </Badge>
+                </span>
               ))}
             </div>
           </div>
