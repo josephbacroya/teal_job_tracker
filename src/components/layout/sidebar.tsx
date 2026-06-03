@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
-import { LayoutDashboard, Briefcase, Calendar, ChevronLeft, LogOut } from "lucide-react";
+import { LayoutDashboard, Briefcase, Calendar, ChevronLeft, LogOut, Sparkles } from "lucide-react";
 import { logoutUser } from "@/lib/actions/auth";
 import { useState } from "react";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/dashboard/matchmaker", label: "AI Matchmaker", icon: Sparkles },
   { href: "/applications", label: "Applications", icon: Briefcase },
   { href: "/interviews", label: "Interviews", icon: Calendar },
 ];

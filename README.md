@@ -4,6 +4,7 @@ A full-stack job application tracking system built with Next.js 15 App Router. T
 
 ## ✨ Features
 
+- **AI Resume Matchmaker** — Upload your resume (PDF/Text) and let Gemini AI recommend the best roles based on your level and skills
 - **Authentication** — Register/login with NextAuth v5 (JWT sessions, bcrypt passwords)
 - **Application Management** — Full CRUD with 7 pipeline statuses (Wishlist → Offer/Rejected)
 - **Analytics Dashboard** — Applications per month chart, status distribution, key metrics
@@ -214,6 +215,7 @@ npm run db:generate      # Regenerate Prisma client after schema change
 
 ## 🔒 Security
 
+- **High-Level Security Headers** — Enforces Strict-Transport-Security, X-Frame-Options, Content-Security-Policy, and Rate-Limiting.
 - Passwords hashed with **bcrypt** (cost factor 12)
 - Every mutation checks **row-level ownership** (`userId`) server-side
 - **Zod validation** on both client (UX) and server (security)
