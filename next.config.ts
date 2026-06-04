@@ -26,6 +26,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   // Vercel handles deployment automatically — no special output mode needed.
+  serverExternalPackages: ["pdf-parse"],
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "5mb",
+    },
+  },
   async headers() {
     return [
       {

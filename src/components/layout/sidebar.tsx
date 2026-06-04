@@ -35,7 +35,7 @@ export function Sidebar({ user: _user }: SidebarProps) {
     >
       <div className="h-20 flex items-center px-6 pt-4 pb-2">
         <div className="h-10 w-10 flex-shrink-0 flex items-center justify-center">
-          <Image src="/logo.svg" alt="Teal Logo" width={40} height={40} className="rounded-xl shadow-sm" />
+          <Image src="/TEAL.png" alt="Teal Logo" width={40} height={40} className="rounded-xl shadow-sm" />
         </div>
         {!collapsed && (
           <span className="font-bold text-foreground text-xl ml-3 tracking-tight">Teal</span>

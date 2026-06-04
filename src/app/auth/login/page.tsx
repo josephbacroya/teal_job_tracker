@@ -1,7 +1,7 @@
 // src/app/auth/login/page.tsx
 import { LoginForm } from "@/components/auth/login-form";
 import Link from "next/link";
-import { Briefcase } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   return (
@@ -9,8 +9,8 @@ export default function LoginPage() {
       {/* Logo */}
       <div className="text-center space-y-2">
         <div className="flex items-center justify-center gap-2">
-          <div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center">
-            <Briefcase className="h-5 w-5 text-primary-foreground" />
+          <div className="h-10 w-10 flex items-center justify-center">
+            <Image src="/TEAL.png" alt="Teal Logo" width={40} height={40} className="rounded-xl shadow-sm" />
           </div>
           <span className="text-2xl font-bold text-foreground">Teal</span>
         </div>
